@@ -18,7 +18,6 @@ fn main() {
     println!("Oxygen * CO2: {}", 
         boolean_array_to_integer(&oxygen_rating) * 
         boolean_array_to_integer(&co2_rating));
-
 }
 
 fn get_vectors(input:String) -> Vec<Vec<bool>> {
@@ -64,10 +63,7 @@ fn filter_list_of_vectors(list_of_vectors: &Vec<Vec<bool>>, most_freq: bool) -> 
             }
         }
 
-        
         result = new_vals;
-
-        println!("After filtering column {}, we have {} rows", i+1, result[0].len());
  
         if result[0].len() == 1 {
             break;
@@ -89,7 +85,6 @@ fn calc_gamma_sigma(list_of_vectors: &Vec<Vec<bool>>) -> (Vec<bool>, Vec<bool>) 
     }
 
     (gamma_vec, sigma_vec)
-
 }
 
 fn boolean_array_to_integer (vector: &Vec<bool>) -> u32 {
