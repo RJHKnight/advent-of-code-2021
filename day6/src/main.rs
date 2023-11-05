@@ -14,7 +14,7 @@ fn main() {
 
     let num_days = 256;
 
-    for i in 0..num_days {
+    for _ in 0..num_days {
         
         let mut new_map = HashMap::new();
 
