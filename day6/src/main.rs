@@ -19,8 +19,8 @@ fn main() {
         let mut new_map = HashMap::new();
 
         for (counter, num_lanternfish) in &lanternfish_map {
+            
             let mut fish = Lanternfish { counter: *counter };
-
             if let Some(new_lanternfish) = fish.step_one_day() {
                 let count = new_map.entry(new_lanternfish.counter).or_insert(0);
                 *count += num_lanternfish;
@@ -31,7 +31,6 @@ fn main() {
         }
 
         lanternfish_map = new_map;
-    
     }
 
     let total_fish = lanternfish_map.values().sum::<u64>();  
