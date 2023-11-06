@@ -17,11 +17,11 @@ fn main() {
 
 fn min_total_fuel(vec: Vec<i32>) -> (i32, i32) {
     // Find the min and max values
-    let min = vec.iter().min().unwrap();
-    let max = vec.iter().max().unwrap();
+    let min = *vec.iter().min().unwrap();
+    let max = *vec.iter().max().unwrap();
 
     let mut fuel_cost = std::collections::HashMap::new();
-    for i in *min..=*max {
+    for i in min..=max {
         let sum :i32 = (1..=i).sum();
         fuel_cost.insert(i, sum);
     }
@@ -30,7 +30,7 @@ fn min_total_fuel(vec: Vec<i32>) -> (i32, i32) {
     let mut min_sum = std::i32::MAX;
     let mut min_val = 0;
 
-    for i in *min..=*max {
+    for i in min..=max {
         let sum: i32 = vec.iter().map(|&x| fuel_cost.get(&(x - i).abs()).unwrap()).sum();
         if sum < min_sum {
             min_sum = sum;
