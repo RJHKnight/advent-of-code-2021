@@ -12,12 +12,12 @@ fn main() {
 
     let path = grid.a_star(Cursor { x: 0, y: 0 }, Cursor { x: grid.data.len()-1, y: grid.data[0].len()-1 });
 
-    print_grid_with_path(&grid, &path);
+    //print_grid_with_path(&grid, &path);
 
     let mut sum = 0;
 
     for i in 0..path.len()-1 {
-        sum += grid.cost(path[i], path[i+1]);
+        sum += grid.cost(path[i+1]);
     }
 
     println!("Total cost: {}", sum);
@@ -122,7 +122,7 @@ impl Grid {
             }
 
             for &neighbor in self.neighbors(position).iter() {
-                let tentative_g_score = g_score.get(&position).unwrap() + self.cost(position, neighbor);
+                let tentative_g_score = g_score.get(&position).unwrap() + self.cost(neighbor);
                 if tentative_g_score < *g_score.get(&neighbor).unwrap_or(&usize::MAX) {
                     came_from.insert(neighbor, position);
                     g_score.insert(neighbor, tentative_g_score);
@@ -136,12 +136,11 @@ impl Grid {
     }
 
     fn heuristic_cost_estimate(&self, start: Cursor, goal: Cursor) -> usize {
-        // Implement your heuristic here. For example, you can use Manhattan distance:
-        (goal.x as isize - start.x as isize).abs() as usize + (goal.y as isize - start.y as isize).abs() as usize
+        let squared_val = (goal.x - start.x).pow(2) + (goal.y - start.y).pow(2);
+        (squared_val as f64).sqrt() as usize
     }
 
-    fn cost(&self, from: Cursor, to: Cursor) -> usize {
-        // Implement the cost function here. For example, you can use the value at the grid position:
+    fn cost(&self, to: Cursor) -> usize {
         self.data[to.y][to.x] as usize
     }
 
